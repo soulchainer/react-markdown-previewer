@@ -1,0 +1,36 @@
+{
+  "name": "markdown-previewer",
+  "version": "0.1.0",
+  "description": "«Markdown Previewer» exercise, part of Free Code Camp «React Projects»",
+  "main": "build/js/bundle.js",
+  "scripts": {
+    "dev": "rollup -c --watch",
+    "reload": "browser-sync start --server 'build' --files 'build'",
+    "start": "npm-run-all --parallel reload dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Riquelme González <juanriqgon@tutanota.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "babel-preset-react": "^6.16.0",
+    "browser-sync": "^2.17.5",
+    "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.7.0",
+    "npm-run-all": "^3.1.1",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-eslint": "^3.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-scss": "^0.1.1",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-watch": "^2.5.0"
+  },
+  "dependencies": {
+    "marked": "^0.3.6",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
