@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 
 import MarkdownEditor from '../markdown_editor/markdown_editor.jsx';
@@ -79,8 +80,21 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
 
 
 
-`
+`,
+      // percentage of content scrolled in each element
+      scrolledPercent: {editor: 0, preview: 0},
+      scrolledView: null
     };
+    this.onScrollChangeDebounced = _.debounce((el) => 
+                                              {this.onScrollChange(el);}, 300);
+  }
+
+  onScrollChange (el) {
+    let totalToScroll = el.scrollHeight  - el.clientHeight;
+    let scrollPercent = Math.round(el.scrollTop * 100 / totalToScroll);
+    let syncedScrolledPercent = {editor: scrollPercent, preview: scrollPercent};
+
+    this.setState({scrolledPercent: syncedScrolledPercent});
   }
 
   render() {
@@ -88,9 +102,19 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
       <div className="MarkdownGroup">
         <MarkdownEditor
           markdown={this.state.markdown}
-          onContentChange={markdown => this.setState({markdown})} />
+          onContentChange={markdown => this.setState({markdown})}
+          onScrollChange={(el) => {
+            this.setState({scrolledView: 'editor'});
+            this.onScrollChange(el);} }
+          scrolledView={this.state.scrolledView}
+          scrolledPercent={this.state.scrolledPercent} />
         <MarkdownPreview
-          markdown={this.state.markdown} />
+          markdown={this.state.markdown}
+          onScrollChange={(el) => {
+            this.setState({scrolledView: 'preview'});
+            this.onScrollChangeDebounced(el);} }
+          scrolledView={this.state.scrolledView}
+          scrolledPercent={this.state.scrolledPercent} />
       </div>
     );
   }
