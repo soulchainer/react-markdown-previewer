@@ -86,7 +86,7 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
       scrolledView: null
     };
     this.onScrollChangeDebounced = _.debounce((el) => 
-                                              {this.onScrollChange(el);}, 300);
+                                              {this.onScrollChange(el);}, 100);
   }
 
   onScrollChange (el) {
@@ -105,7 +105,7 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
           onContentChange={markdown => this.setState({markdown})}
           onScrollChange={(el) => {
             this.setState({scrolledView: 'editor'});
-            this.onScrollChange(el);} }
+            this.onScrollChangeDebounced(el);} }
           scrolledView={this.state.scrolledView}
           scrolledPercent={this.state.scrolledPercent} />
         <MarkdownPreview
