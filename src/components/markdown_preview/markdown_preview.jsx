@@ -7,16 +7,17 @@ import './markdown_preview.scss';
 class MarkdownPreview extends React.Component {
   animateScroll(position, duration) {
     const startPoint = this.el.scrollTop;
-    const distance = Math.abs(position - startPoint); // total distance to cover
+    let distance = Math.abs(position - startPoint); // distance to cover
     const frames = (duration * 24) / 1000; // 24 fps
+    const timeStep = 1000/24; // duration of every frame
     const direction = (position > startPoint)? 1 : -1; // -1 for upwards
-    const scrollStep = Math.round(distance/frames) * direction; // distance by frame
-    const timeStep = Math.round(duration / frames); // duration of every frame
+    const scrollStep = distance/frames; // distance by frame
     const scrollInterval = setInterval(() => {
-      duration -= timeStep;
-      if (duration >= timeStep) {
-        this.el.scrollTop += scrollStep;  
+      if (distance > scrollStep) {
+        this.el.scrollTop += scrollStep * direction;
+        distance -= scrollStep;
       } else {
+        this.el.scrollTop += distance * direction;
         clearInterval(scrollInterval);
       }
     }, timeStep);
@@ -24,7 +25,7 @@ class MarkdownPreview extends React.Component {
 
   updateScroll(scrollPercent) {
     let totalScrollLength = this.el.scrollHeight  - this.el.clientHeight;
-    let scrollTo = Math.round((totalScrollLength * scrollPercent) / 100);
+    let scrollTo = (totalScrollLength * scrollPercent) / 100;
     console.log(this.props.scrolledPercent);
     console.log("Preview update " + scrollPercent);
     this.animateScroll(scrollTo, 300);
