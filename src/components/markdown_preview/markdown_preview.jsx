@@ -5,10 +5,29 @@ import marked from 'marked';
 import './markdown_preview.scss';
 
 class MarkdownPreview extends React.Component {
+  animateScroll(position, duration) {
+    const startPoint = this.el.scrollTop;
+    const distance = Math.abs(position - startPoint); // total distance to cover
+    const frames = (duration * 24) / 1000; // 24 fps
+    const direction = (position > startPoint)? 1 : -1; // -1 for upwards
+    const scrollStep = Math.round(distance/frames) * direction; // distance by frame
+    const timeStep = Math.round(duration / frames); // duration of every frame
+    const scrollInterval = setInterval(() => {
+      duration -= timeStep;
+      if (duration >= timeStep) {
+        this.el.scrollTop += scrollStep;  
+      } else {
+        clearInterval(scrollInterval);
+      }
+    }, timeStep);
+  }
+
   updateScroll(scrollPercent) {
-    let totalToScroll = this.el.scrollHeight  - this.el.clientHeight;
-    let scrollTo = Math.round((totalToScroll * scrollPercent) / 100);
-    this.el.scrollTop = scrollTo;
+    let totalScrollLength = this.el.scrollHeight  - this.el.clientHeight;
+    let scrollTo = Math.round((totalScrollLength * scrollPercent) / 100);
+    console.log(this.props.scrolledPercent);
+    console.log("Preview update " + scrollPercent);
+    this.animateScroll(scrollTo, 300);
   }
 
   componentDidMount() {
@@ -16,8 +35,8 @@ class MarkdownPreview extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.scrolledView != 'preview') {
-      this.updateScroll(nextProps.scrolledPercent.preview);
+    if (nextProps.autoScrolledView === 'preview') {
+      this.updateScroll(nextProps.scrolledPercent.editor);
     }
   }
 
@@ -28,6 +47,7 @@ class MarkdownPreview extends React.Component {
       <div
         className="MarkdownPreview"
         dangerouslySetInnerHTML= {html}
+        onMouseEnter={() => this.props.onMouseEnter() }
         onScroll={event => this.props.onScrollChange(event.target)} />
     );
   }

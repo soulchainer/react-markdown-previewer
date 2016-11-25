@@ -83,17 +83,20 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
 `,
       // percentage of content scrolled in each element
       scrolledPercent: {editor: 0, preview: 0},
-      scrolledView: null
+      autoScrolledView: null
     };
-    this.onScrollChangeDebounced = _.debounce((el) => 
-                                              {this.onScrollChange(el);}, 100);
+    //this.onScrollChangeDebounced = _.debounce((el) => 
+    //                                          {this.onScrollChange(el);}, 300);
+    this.onScrollChangeDebounced = _.debounce((el) => {
+      this.onScrollChange(el);}, 300);
   }
 
   onScrollChange (el) {
     let totalToScroll = el.scrollHeight  - el.clientHeight;
     let scrollPercent = Math.round(el.scrollTop * 100 / totalToScroll);
+    console.log("Update Scroll percent: "+ scrollPercent);
+    console.log(el);
     let syncedScrolledPercent = {editor: scrollPercent, preview: scrollPercent};
-
     this.setState({scrolledPercent: syncedScrolledPercent});
   }
 
@@ -103,17 +106,15 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
         <MarkdownEditor
           markdown={this.state.markdown}
           onContentChange={markdown => this.setState({markdown})}
-          onScrollChange={(el) => {
-            this.setState({scrolledView: 'editor'});
-            this.onScrollChangeDebounced(el);} }
-          scrolledView={this.state.scrolledView}
+          onMouseEnter={() => this.setState({autoScrolledView: 'preview'})}
+          onScrollChange={ this.onScrollChangeDebounced }
+          autoScrolledView={this.state.autoScrolledView}
           scrolledPercent={this.state.scrolledPercent} />
         <MarkdownPreview
           markdown={this.state.markdown}
-          onScrollChange={(el) => {
-            this.setState({scrolledView: 'preview'});
-            this.onScrollChangeDebounced(el);} }
-          scrolledView={this.state.scrolledView}
+          onMouseEnter={() => this.setState({autoScrolledView: 'editor'})}
+          onScrollChange={ this.onScrollChangeDebounced }
+          autoScrolledView={this.state.autoScrolledView}
           scrolledPercent={this.state.scrolledPercent} />
       </div>
     );
