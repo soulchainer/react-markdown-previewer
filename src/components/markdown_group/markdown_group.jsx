@@ -82,22 +82,19 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
 
 `,
       // percentage of content scrolled in each element
-      scrolledPercent: {editor: 0, preview: 0},
+      syncedScroll: {editor: 0, preview: 0},
       autoScrolledView: null
     };
-    //this.onScrollChangeDebounced = _.debounce((el) => 
-    //                                          {this.onScrollChange(el);}, 300);
-    this.onScrollChangeDebounced = _.debounce((el) => {
-      this.onScrollChange(el);}, 300);
   }
 
-  onScrollChange (el) {
-    let totalToScroll = el.scrollHeight  - el.clientHeight;
-    let scrollPercent = Math.round(el.scrollTop * 100 / totalToScroll);
-    console.log("Update Scroll percent: "+ scrollPercent);
-    console.log(el);
-    let syncedScrolledPercent = {editor: scrollPercent, preview: scrollPercent};
-    this.setState({scrolledPercent: syncedScrolledPercent});
+  onScrollChange() {
+    let _onScrollChange = el => {
+      let totalToScroll = el.scrollHeight  - el.clientHeight;
+      let scrollPercent = Math.round(el.scrollTop * 100 / totalToScroll);
+      let syncedScroll = {editor: scrollPercent, preview: scrollPercent};
+      this.setState({syncedScroll});
+    };
+    return _.debounce(el => _onScrollChange(el), 300);
   }
 
   render() {
@@ -107,15 +104,15 @@ nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
           markdown={this.state.markdown}
           onContentChange={markdown => this.setState({markdown})}
           onMouseEnter={() => this.setState({autoScrolledView: 'preview'})}
-          onScrollChange={ this.onScrollChangeDebounced }
+          onScrollChange={ this.onScrollChange() }
           autoScrolledView={this.state.autoScrolledView}
-          scrolledPercent={this.state.scrolledPercent} />
+          syncedScroll={this.state.syncedScroll} />
         <MarkdownPreview
           markdown={this.state.markdown}
           onMouseEnter={() => this.setState({autoScrolledView: 'editor'})}
-          onScrollChange={ this.onScrollChangeDebounced }
+          onScrollChange={ this.onScrollChange() }
           autoScrolledView={this.state.autoScrolledView}
-          scrolledPercent={this.state.scrolledPercent} />
+          syncedScroll={this.state.syncedScroll} />
       </div>
     );
   }
