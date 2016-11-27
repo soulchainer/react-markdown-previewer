@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import MarkdownScrollbox from '../markdown_scrollbox/markdown_scrollbox';
 import hljs from '../../../static/lib/highlight/index.js';
