@@ -4,7 +4,7 @@ import React from 'react';
 import MarkdownEditor from '../markdown_editor/markdown_editor.jsx';
 import MarkdownPreview from '../markdown_preview/markdown_preview.jsx';
 
-import readme from '../../../static/README.md';
+import readme from '../../../static/doc/README.md';
 import './markdown_group.scss';
 
 class MarkdownGroup extends React.Component {

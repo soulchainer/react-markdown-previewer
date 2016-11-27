@@ -15,7 +15,7 @@ export default {
   sourceMap: 'inline',
   plugins: [
     string({
-      include: 'static/*.md',
+      include: 'static/doc/*.md',
     }),
     scss({
       outputStyle: 'compressed',
@@ -27,10 +27,10 @@ export default {
       browser: true,
     }),
     commonjs({
-      include: 'node_modules/**',
+      include: ['node_modules/**', 'static/lib/**'],
       namedExports: {
         'node_modules/react-dom/index.js': ['render'],
-        'node_modules/highlight.js/lib/index.js': ['hljs'],
+        'static/lib/highlight/index.js': ['hljs'],
       },
     }),
     eslint({
