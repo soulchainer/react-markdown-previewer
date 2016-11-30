@@ -14,7 +14,7 @@ class MarkdownEditor extends MarkdownScrollbox {
       <textarea
         className="MarkdownEditor" cols="80"
         onChange={event => this.props.onContentChange(event.target.value)}
-        onMouseEnter={() => this.props.onMouseEnter() }
+        onMouseEnter={() => this.props.onMouseEnter()}
         onScroll={event => this.props.onScrollChange(event.target)}
         defaultValue={this.props.markdown}
       />
