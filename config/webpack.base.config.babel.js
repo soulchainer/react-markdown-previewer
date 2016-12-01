@@ -2,6 +2,9 @@ import webpack from 'webpack'; // eslint-disable-line import/no-extraneous-depen
 import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous-dependencies
 
 export default new Config().merge({
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   entry: {
     app: './src/index.jsx',
     vendor: 'librerías de terceros que apenas cambian',
