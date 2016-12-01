@@ -11,7 +11,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist/js'),
+    path: path.resolve(__dirname, 'build/js'),
   },
   module: {
     rules: [
@@ -57,9 +57,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  sassLoader: {
-    includePaths: [path.resolve(__dirname, './_styles')],
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({

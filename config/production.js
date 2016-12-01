@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build/js'),
+    path: path.resolve(__dirname, 'dist/js'),
   },
   module: {
     rules: [
@@ -61,14 +61,15 @@ module.exports = {
       },
     ],
   },
-  sassLoader: {
-    includePaths: [path.resolve(__dirname, './_styles')],
-  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest'],
     }),
-    new ExtractTextPlugin('bundle.css'),
+    new ExtractTextPlugin({
+      filename: 'bundle.css',
+      disable: false,
+      allChunks: true,
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: true },
     }),
