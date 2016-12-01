@@ -1,18 +1,20 @@
-const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
-const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
-const path = require('path');
+import webpack from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous-dependencies
+import ExtractTextPlugin from 'extract-text-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
+import { resolve } from 'path';
 
-module.exports = {
-  eslint: {
-    configFile: './.eslintrc.json',
+export default new Config().extend({
+  'config/webpack.development.config.babel.js': (config) => {
+    const conf = config;
+
+    delete conf.devtool;
+    delete conf.output.pathinfo;
+
+    return conf;
   },
-  entry: {
-    app: './src/components/index.jsx',
-    vendor: 'librerías de terceros que apenas cambian',
-  },
+}).merge({
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist/js'),
+    path: resolve(__dirname, 'dist/js'),
   },
   module: {
     rules: [
@@ -56,15 +58,12 @@ module.exports = {
         test: /\.md$/,
         loader: 'raw-loader',
         include: [
-          path.resolve(__dirname, 'static/doc'),
+          resolve(__dirname, 'static/doc'),
         ],
       },
     ],
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest'],
-    }),
     new ExtractTextPlugin({
       filename: 'bundle.css',
       disable: false,
@@ -74,4 +73,4 @@ module.exports = {
       compress: { warnings: true },
     }),
   ],
-};
+});

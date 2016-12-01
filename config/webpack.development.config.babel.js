@@ -1,17 +1,12 @@
-const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
-const path = require('path');
+import webpack from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
+import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous-dependencies
+import { resolve } from 'path'; // eslint-disable-line import/no-extraneous-dependencies
 
-module.exports = {
-  eslint: {
-    configFile: './.eslintrc.json',
-  },
-  entry: {
-    app: './src/components/index.jsx',
-    vendor: 'librerías de terceros que apenas cambian',
-  },
+export default new Config().extend('config/webpack.base.config.babel.js').merge({
+  devtool: 'cheap-eval-source-map',
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'build/js'),
+    path: resolve(__dirname, 'build/js'),
+    pathinfo: true,
   },
   module: {
     rules: [
@@ -53,14 +48,14 @@ module.exports = {
         test: /\.md$/,
         loader: 'raw-loader',
         include: [
-          path.resolve(__dirname, 'static/doc'),
+          resolve(__dirname, 'static/doc'),
         ],
       },
     ],
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest'],
+    new webpack.LoaderOptionsPlugin({
+      debug: true,
     }),
   ],
-};
+});

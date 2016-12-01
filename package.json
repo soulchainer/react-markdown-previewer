@@ -32,7 +32,9 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "webpack": "github:webpack/webpack#v2.1.0-beta.27"
+    "webpack": "^2.1.0-beta.27",
+    "webpack-config": "^6.2.1",
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "highlight.js": "^9.8.0",
