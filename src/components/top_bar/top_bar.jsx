@@ -1,12 +1,10 @@
 import React from 'react';
 
-import './top_bar.scss';
+import './_styles/top_bar.scss';
 
-const TopBar = () => {
+const TopBar = function TopBar() {
   return (
-    <header className="TopBar">
-
-    </header>
+    <header className="TopBar" />
   );
 };
 
