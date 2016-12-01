@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
 
-import MarkdownEditor from '../markdown_editor/markdown_editor.jsx';
-import MarkdownPreview from '../markdown_preview/markdown_preview.jsx';
+import MarkdownEditor from '../markdown_editor/markdown_editor';
+import MarkdownPreview from '../markdown_preview/markdown_preview';
 
 import readme from '../../../static/doc/README.md';
-import './markdown_group.scss';
+import './_styles/markdown_group.scss';
 
 class MarkdownGroup extends React.Component {
   constructor(props) {
@@ -14,20 +14,20 @@ class MarkdownGroup extends React.Component {
     this.state = {
       markdown: `${readme}`,
       // percentage of content scrolled in each element
-      syncedScroll: {editor: 0, preview: 0},
+      syncedScroll: { editor: 0, preview: 0 },
       // box to be autoscrolled, to be in sync with the one being scrolled
-      autoScrolledView: null
+      autoScrolledView: null,
     };
   }
 
   onScrollChange() {
-    let _onScrollChange = el => {
-      let totalToScroll = el.scrollHeight  - el.clientHeight;
-      let scrollPercent = Math.round(el.scrollTop * 100 / totalToScroll);
-      let syncedScroll = {editor: scrollPercent, preview: scrollPercent};
-      this.setState({syncedScroll});
+    const scrollChange = (el) => {
+      const totalToScroll = el.scrollHeight - el.clientHeight;
+      const scrollPercent = Math.round((el.scrollTop * 100) / totalToScroll);
+      const syncedScroll = { editor: scrollPercent, preview: scrollPercent };
+      this.setState({ syncedScroll });
     };
-    return _.debounce(el => _onScrollChange(el), 300);
+    return _.debounce(el => scrollChange(el), 300);
   }
 
   render() {
@@ -35,17 +35,19 @@ class MarkdownGroup extends React.Component {
       <div className="MarkdownGroup">
         <MarkdownEditor
           markdown={this.state.markdown}
-          onContentChange={markdown => this.setState({markdown})}
-          onMouseEnter={() => this.setState({autoScrolledView: 'preview'})}
-          onScrollChange={ this.onScrollChange() }
+          onContentChange={markdown => this.setState({ markdown })}
+          onMouseEnter={() => this.setState({ autoScrolledView: 'preview' })}
+          onScrollChange={this.onScrollChange()}
           autoScrolledView={this.state.autoScrolledView}
-          syncedScroll={this.state.syncedScroll} />
+          syncedScroll={this.state.syncedScroll}
+        />
         <MarkdownPreview
           markdown={this.state.markdown}
-          onMouseEnter={() => this.setState({autoScrolledView: 'editor'})}
-          onScrollChange={ this.onScrollChange() }
+          onMouseEnter={() => this.setState({ autoScrolledView: 'editor' })}
+          onScrollChange={this.onScrollChange()}
           autoScrolledView={this.state.autoScrolledView}
-          syncedScroll={this.state.syncedScroll} />
+          syncedScroll={this.state.syncedScroll}
+        />
       </div>
     );
   }

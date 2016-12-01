@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import '../styles/reset.scss';
-import '../styles/variables.scss';
+import TopBar from './components/top_bar/top_bar';
+import MarkdownGroup from './components/markdown_group/markdown_group';
 
-import TopBar from './components/top_bar/top_bar.jsx';
-import MarkdownGroup from './components/markdown_group/markdown_group.jsx';
+require('./_styles/reset.scss');
+require('./_styles/variables.scss');
 
-const App = () => {
+const App = function App() {
   return (
     <div>
       <TopBar />

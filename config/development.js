@@ -58,6 +58,9 @@ module.exports = {
       },
     ],
   },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, './_styles')],
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest'],

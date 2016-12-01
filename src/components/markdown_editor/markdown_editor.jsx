@@ -1,7 +1,7 @@
 import React from 'react';
 import MarkdownScrollbox from '../markdown_scrollbox/markdown_scrollbox';
 
-import './markdown_editor.scss';
+import './_styles/markdown_editor.scss';
 
 class MarkdownEditor extends MarkdownScrollbox {
   constructor(props) {
