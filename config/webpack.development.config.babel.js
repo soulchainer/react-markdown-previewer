@@ -5,18 +5,11 @@ import { resolve } from 'path'; // eslint-disable-line import/no-extraneous-depe
 export default new Config().extend('config/webpack.base.config.babel.js').merge({
   devtool: 'cheap-eval-source-map',
   output: {
-    path: resolve(__dirname, 'build/js'),
+    path: resolve(__dirname, '../build/js'),
     pathinfo: true,
   },
   module: {
     rules: [
-      // Preloaders
-      {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
       // JavaScript
       { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
       // Styles
@@ -41,14 +34,6 @@ export default new Config().extend('config/webpack.base.config.babel.js').merge(
               sourceMap: true,
             },
           },
-        ],
-      },
-      // Text files
-      {
-        test: /\.md$/,
-        loader: 'raw-loader',
-        include: [
-          resolve(__dirname, 'static/doc'),
         ],
       },
     ],

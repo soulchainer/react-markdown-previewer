@@ -14,17 +14,10 @@ export default new Config().extend({
   },
 }).merge({
   output: {
-    path: resolve(__dirname, 'dist/js'),
+    path: resolve(__dirname, '../dist/js'),
   },
   module: {
     rules: [
-      // Preloaders
-      {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
       // JavaScript
       { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
       // Styles
@@ -52,14 +45,6 @@ export default new Config().extend({
             },
           ],
         }),
-      },
-      // Text files
-      {
-        test: /\.md$/,
-        loader: 'raw-loader',
-        include: [
-          resolve(__dirname, 'static/doc'),
-        ],
       },
     ],
   },

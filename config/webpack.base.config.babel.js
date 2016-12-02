@@ -24,6 +24,13 @@ export default new Config().merge({
           configFile: './.eslintrc.json',
         },
       },
+      // Text files
+      {
+        enforce: 'pre',
+        test: /\.md$/,
+        loader: 'raw-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
   plugins: [

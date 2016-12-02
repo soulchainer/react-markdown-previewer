@@ -12,7 +12,7 @@ class MarkdownGroup extends React.Component {
     super(props);
 
     this.state = {
-      markdown: `${readme}`,
+      markdown: readme,
       // percentage of content scrolled in each element
       syncedScroll: { editor: 0, preview: 0 },
       // box to be autoscrolled, to be in sync with the one being scrolled
