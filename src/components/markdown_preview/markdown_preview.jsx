@@ -47,14 +47,16 @@ class MarkdownPreview extends MarkdownScrollbox {
     const processedMarkdown = md.render(this.props.markdown);
 
     // const html = { __html: htmlElement.innerHTML };
-    const html = { __html: processedMarkdown };
+    // const html = { __html: processedMarkdown };
     return (
       <div
         className="MarkdownPreview"
-        dangerouslySetInnerHTML={html}
+        // dangerouslySetInnerHTML={html}
         onMouseEnter={() => this.props.onMouseEnter()}
         onScroll={event => this.props.onScrollChange(event.target)}
-      />
+      >
+        {processedMarkdown}
+      </div>
     );
   }
 }
