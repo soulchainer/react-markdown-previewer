@@ -40,7 +40,14 @@ export default new Config().merge({
         enforce: 'pre',
         test: /\.md$/,
         loader: 'raw-loader',
-        exclude: /node_modules/,
+        include: resolve(__dirname, '../static/doc'),
+      },
+      // JSON files
+      {
+        enforce: 'pre',
+        test: /\.json$/,
+        loader: 'json-loader',
+        include: resolve(__dirname, '../node_modules/entities/maps'),
       },
     ],
   },

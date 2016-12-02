@@ -1,5 +1,5 @@
 import React from 'react';
-import * as MarkdownIt from 'markdown-it';
+import MarkdownIt from 'markdown-it';
 import hljs from 'highlight'; // eslint-disable-line import/no-extraneous-dependencies
 
 import MarkdownScrollbox from '../markdown_scrollbox/markdown_scrollbox';
@@ -12,23 +12,42 @@ class MarkdownPreview extends MarkdownScrollbox {
     this.name = 'preview';
   }
 
+  /*
   highlightCode(htmlElement) {
     const codeBlocks = htmlElement.content.querySelectorAll('pre>code');
-    for (let block of codeBlocks) {
-      // hljs.highlightBlock(block);
-    }
+    codeBlocks.forEach((block) => {
+      hljs.highlightBlock(block);
+    });
     return htmlElement;
   }
+  */
 
   render() {
-    // let processedMarkdown = MarkdownIt(this.props.markdown);
-    const processedMarkdown = this.props.markdown;
-    let htmlElement = document.createElement('template');
-    htmlElement.innerHTML = processedMarkdown;
+    // const processedMarkdown = MarkdownIt(this.props.markdown);
+    // let htmlElement = document.createElement('template');
+    // htmlElement.innerHTML = processedMarkdown;
 
-    htmlElement = this.highlightCode(htmlElement);
+    // htmlElement = this.highlightCode(htmlElement);
 
-    const html = { __html: htmlElement.innerHTML };
+    // Actual default values
+    const md = MarkdownIt({
+      highlight: (str, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            return hljs.highlight(lang, str).value;
+          } catch (__) {
+            return '';
+          }
+        }
+
+        return ''; // use external default escaping
+      },
+    });
+
+    const processedMarkdown = md.render(this.props.markdown);
+
+    // const html = { __html: htmlElement.innerHTML };
+    const html = { __html: processedMarkdown };
     return (
       <div
         className="MarkdownPreview"
