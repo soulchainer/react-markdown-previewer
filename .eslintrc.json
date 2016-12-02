@@ -1,8 +1,16 @@
 {
-   "env": {
-      "browser": true,
-      "node": true
+  "env": {
+    "browser": true,
+    "node": true
   },
   "parser": "babel-eslint", 
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolver": {
+      "webpack": { 
+        "config": "./config/webpack.base.config.babel.js"
+      }
+    }
+  }
 }
