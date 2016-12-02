@@ -1,13 +1,24 @@
 import webpack from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous-dependencies
+import { resolve } from 'path';
 
 export default new Config().merge({
   resolve: {
+    alias: {
+      highlight: resolve(__dirname, '../static/lib/highlight/index.js'),
+    },
     extensions: ['.js', '.jsx'],
   },
+  context: resolve(__dirname, '..'),
   entry: {
     app: './src/index.jsx',
-    vendor: 'librerías de terceros que apenas cambian',
+    vendor: [
+      './static/lib/highlight/index.js',
+      './node_modules/lodash/debounce.js',
+      'markdown-it',
+      'react',
+      'react-dom',
+    ],
   },
   output: {
     filename: '[name].js',

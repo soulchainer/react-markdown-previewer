@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { debounce } from 'lodash';
 import React from 'react';
 
 import MarkdownEditor from '../markdown_editor/markdown_editor';
@@ -27,7 +27,7 @@ class MarkdownGroup extends React.Component {
       const syncedScroll = { editor: scrollPercent, preview: scrollPercent };
       this.setState({ syncedScroll });
     };
-    return _.debounce(el => scrollChange(el), 300);
+    return debounce(el => scrollChange(el), 300);
   }
 
   render() {

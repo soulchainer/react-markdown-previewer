@@ -1,8 +1,8 @@
 import React from 'react';
 import * as MarkdownIt from 'markdown-it';
+import hljs from 'highlight'; // eslint-disable-line import/no-extraneous-dependencies
 
 import MarkdownScrollbox from '../markdown_scrollbox/markdown_scrollbox';
-// import hljs from '../../../static/lib/highlight/index.js';
 
 import './_styles/markdown_preview.scss';
 
