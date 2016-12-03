@@ -1,15 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 class MarkdownScrollbox extends React.Component {
   constructor(props) {
     super(props);
     this.name = null;
     this.adjacent = { editor: 'preview', preview: 'editor' };
-  }
-
-  componentDidMount() {
-    this.el = ReactDOM.findDOMNode(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -19,7 +14,7 @@ class MarkdownScrollbox extends React.Component {
   }
 
   animateScroll(position, duration) {
-    const startPoint = this.el.scrollTop;
+    const startPoint = this.node.scrollTop;
     let distance = Math.abs(position - startPoint); // distance to cover
     const frames = (duration * 24) / 1000; // 24 fps
     const timeStep = 1000 / 24; // duration of every frame
@@ -27,17 +22,17 @@ class MarkdownScrollbox extends React.Component {
     const scrollStep = distance / frames; // distance by frame
     const scrollInterval = setInterval(() => {
       if (distance > scrollStep) {
-        this.el.scrollTop += scrollStep * direction;
+        this.node.scrollTop += scrollStep * direction;
         distance -= scrollStep;
       } else {
-        this.el.scrollTop += distance * direction;
+        this.node.scrollTop += distance * direction;
         clearInterval(scrollInterval);
       }
     }, timeStep);
   }
 
   updateScroll(scrollPercent) {
-    const totalScrollLength = this.el.scrollHeight - this.el.clientHeight;
+    const totalScrollLength = this.node.scrollHeight - this.node.clientHeight;
     const scrollTo = (totalScrollLength * scrollPercent) / 100;
     this.animateScroll(scrollTo, 300);
   }
