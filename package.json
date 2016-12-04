@@ -4,9 +4,9 @@
   "description": "«Markdown Previewer» exercise, part of Free Code Camp «React Projects»",
   "main": "build/js/bundle.js",
   "scripts": {
-    "dev": "rollup -c --watch",
-    "reload": "browser-sync start --server 'build' --files 'build'",
-    "start": "webpack --config webpack.config.js",
+    "prod": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack",
+    "start": "NODE_ENV=development webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Juan Riquelme González <juanriqgon@tutanota.com>",
