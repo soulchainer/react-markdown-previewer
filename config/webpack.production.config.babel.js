@@ -3,6 +3,17 @@ import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous
 import ExtractTextPlugin from 'extract-text-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
 import { resolve } from 'path';
 
+const extractHTML = new ExtractTextPlugin({
+  filename: '../index.html',
+  disable: false,
+  allChunks: true,
+});
+const extractSCSS = new ExtractTextPlugin({
+  filename: '../styles/bundle.css',
+  disable: false,
+  allChunks: true,
+});
+
 export default new Config().extend({
   'config/webpack.development.config.babel.js': (config) => {
     const conf = config;
@@ -18,13 +29,28 @@ export default new Config().extend({
   },
   module: {
     rules: [
+      // HTML files
+      {
+        enforce: 'pre',
+        test: /\.html$/,
+        include: resolve(__dirname, '../static/html'),
+        loader: extractHTML.extract({
+          loader: [
+            /* {
+              loader: 'html-minify-loader',
+            },*/
+            {
+              loader: 'raw-loader',
+            },
+          ],
+        }),
+      },
       // JavaScript
       { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
       // Styles
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
+        loader: extractSCSS.extract({
           loader: [
             {
               loader: 'css-loader',
@@ -49,13 +75,8 @@ export default new Config().extend({
     ],
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'bundle.css',
-      disable: false,
-      allChunks: true,
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: true },
-    }),
+    extractSCSS,
+    extractHTML,
+    new webpack.optimize.UglifyJsPlugin(),
   ],
 });
