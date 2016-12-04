@@ -31,6 +31,9 @@ export default new Config().extend({
     return conf;
   },
 }).merge({
+  devServer: {
+    contentBase: resolve(__dirname, '../dist'),
+  },
   output: {
     path: resolve(__dirname, '../dist/js'),
   },

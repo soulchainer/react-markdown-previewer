@@ -11,6 +11,9 @@ const HtmlWebpackPluginConf = new HtmlWebpackPlugin({
 });
 
 export default new Config().extend('config/webpack.base.config.babel.js').merge({
+  devServer: {
+    contentBase: resolve(__dirname, '../build'),
+  },
   devtool: 'cheap-eval-source-map',
   output: {
     path: resolve(__dirname, '../build/js'),
