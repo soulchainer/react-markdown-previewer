@@ -1,12 +1,13 @@
 import webpack from 'webpack'; // eslint-disable-line import/no-extraneous-dependencies
 import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous-dependencies
 import { resolve } from 'path'; // eslint-disable-line import/no-extraneous-dependencies
-import ExtractTextPlugin from 'extract-text-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
+import HtmlWebpackPlugin from 'html-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
 
-const extractHTML = new ExtractTextPlugin({
+const HtmlWebpackPluginConf = new HtmlWebpackPlugin({
   filename: '../index.html',
-  disable: false,
-  allChunks: true,
+  template: resolve(__dirname, '../static/html/index.html'),
+  inject: 'body',
+  hash: true,
 });
 
 export default new Config().extend('config/webpack.base.config.babel.js').merge({
@@ -17,19 +18,6 @@ export default new Config().extend('config/webpack.base.config.babel.js').merge(
   },
   module: {
     rules: [
-      // HTML files
-      {
-        enforce: 'pre',
-        test: /\.html$/,
-        include: resolve(__dirname, '../static/html'),
-        loader: extractHTML.extract({
-          loader: [
-            {
-              loader: 'raw-loader',
-            },
-          ],
-        }),
-      },
       // JavaScript
       { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
       // Styles
@@ -59,7 +47,7 @@ export default new Config().extend('config/webpack.base.config.babel.js').merge(
     ],
   },
   plugins: [
-    extractHTML,
+    HtmlWebpackPluginConf,
     new webpack.LoaderOptionsPlugin({
       debug: true,
     }),

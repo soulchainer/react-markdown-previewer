@@ -2,11 +2,18 @@ import webpack from 'webpack'; // eslint-disable-line import/no-extraneous-depen
 import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous-dependencies
 import ExtractTextPlugin from 'extract-text-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
 import { resolve } from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
 
-const extractHTML = new ExtractTextPlugin({
+const HtmlWebpackPluginConf = new HtmlWebpackPlugin({
   filename: '../index.html',
-  disable: false,
-  allChunks: true,
+  template: resolve(__dirname, '../static/html/index.html'),
+  inject: 'body',
+  minify: {
+    collapseWhitespace: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: true,
+  },
+  hash: true,
 });
 const extractSCSS = new ExtractTextPlugin({
   filename: '../styles/bundle.css',
@@ -29,22 +36,6 @@ export default new Config().extend({
   },
   module: {
     rules: [
-      // HTML files
-      {
-        enforce: 'pre',
-        test: /\.html$/,
-        include: resolve(__dirname, '../static/html'),
-        loader: extractHTML.extract({
-          loader: [
-            /* {
-              loader: 'html-minify-loader',
-            },*/
-            {
-              loader: 'raw-loader',
-            },
-          ],
-        }),
-      },
       // JavaScript
       { test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ },
       // Styles
@@ -76,7 +67,7 @@ export default new Config().extend({
   },
   plugins: [
     extractSCSS,
-    extractHTML,
+    HtmlWebpackPluginConf,
     new webpack.optimize.UglifyJsPlugin(),
   ],
 });
