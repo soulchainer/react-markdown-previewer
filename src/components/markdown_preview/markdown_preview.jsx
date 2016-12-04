@@ -12,52 +12,32 @@ class MarkdownPreview extends MarkdownScrollbox {
     this.name = 'preview';
   }
 
-  /*
-  highlightCode(htmlElement) {
-    const codeBlocks = htmlElement.content.querySelectorAll('pre>code');
-    codeBlocks.forEach((block) => {
-      hljs.highlightBlock(block);
-    });
-    return htmlElement;
-  }
-  */
-
   render() {
-    // const processedMarkdown = MarkdownIt(this.props.markdown);
-    // let htmlElement = document.createElement('template');
-    // htmlElement.innerHTML = processedMarkdown;
-
-    // htmlElement = this.highlightCode(htmlElement);
-
     // Actual default values
     const md = MarkdownIt({
       highlight: (str, lang) => {
         if (lang && hljs.getLanguage(lang)) {
           try {
-            return hljs.highlight(lang, str).value;
+            return `<pre class="hljs"><code>${hljs.highlight(lang, str, true).value}</code></pre>`;
           } catch (__) {
             return '';
           }
         }
 
-        return ''; // use external default escaping
+        return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
       },
     });
 
     const processedMarkdown = md.render(this.props.markdown);
-
-    // const html = { __html: htmlElement.innerHTML };
-    // const html = { __html: processedMarkdown };
+    const html = { __html: processedMarkdown };
     return (
       <div
         className="MarkdownPreview"
-        // dangerouslySetInnerHTML={html}
+        dangerouslySetInnerHTML={html} // eslint-disable-line react/no-danger
         onMouseEnter={() => this.props.onMouseEnter()}
         onScroll={event => this.props.onScrollChange(event.target)}
         ref={(node) => { this.node = node; }}
-      >
-        {processedMarkdown}
-      </div>
+      />
     );
   }
 }
