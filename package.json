@@ -43,6 +43,7 @@
     "highlight.js": "^9.8.0",
     "lodash": "^4.17.2",
     "markdown-it": "^8.1.0",
+    "markdown-it-emoji": "^1.3.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   }

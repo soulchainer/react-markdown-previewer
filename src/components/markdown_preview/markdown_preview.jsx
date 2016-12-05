@@ -1,6 +1,8 @@
 import React from 'react';
 import MarkdownIt from 'markdown-it';
+import emoji from 'markdown-it-emoji';
 import hljs from 'highlight'; // eslint-disable-line import/no-extraneous-dependencies
+
 
 import MarkdownScrollbox from '../markdown_scrollbox/markdown_scrollbox';
 
@@ -27,6 +29,7 @@ class MarkdownPreview extends MarkdownScrollbox {
         return `<pre class="hljs"><code>${md.utils.escapeHtml(str)}</code></pre>`;
       },
     });
+    md.use(emoji);
 
     const processedMarkdown = md.render(this.props.markdown);
     const html = { __html: processedMarkdown };
