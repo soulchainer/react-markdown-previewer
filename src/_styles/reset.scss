@@ -5,3 +5,13 @@
 body {
   margin: 0;
 }
+
+button {
+  background-color: inherit;
+  border: 0;
+  padding: 0;
+
+  &::-moz-focus-inner { // no dotted border when the button is clicked
+    border: 0;
+  }
+}

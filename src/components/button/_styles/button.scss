@@ -1,0 +1,17 @@
+.Button {
+  align-items: center;
+  border-radius: 5px;
+  color: #eee;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+
+  &:hover {
+    color: #282828;
+  }
+
+  &>span {
+    margin: 10%;
+    text-transform: capitalize;
+  }
+}
