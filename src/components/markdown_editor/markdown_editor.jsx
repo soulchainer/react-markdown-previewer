@@ -16,7 +16,7 @@ class MarkdownEditor extends MarkdownScrollbox {
         onChange={event => this.props.onContentChange(event.target.value)}
         onMouseEnter={() => this.props.onMouseEnter()}
         onScroll={event => this.props.onScrollChange(event.target)}
-        defaultValue={this.props.markdown}
+        value={this.props.markdown}
         ref={(node) => { this.node = node; }}
       />
     );

@@ -3,21 +3,19 @@ import React, { PropTypes } from 'react';
 import './_styles/button.scss';
 
 const Button = function Button(props) {
-  const options = {
-    clear: this.clearEditor,
-  };
-
   return (
     <button
       className="Button"
-      onClick={() => options[props.func]()}
+      onClick={() => props.togglePendingAction(props.action)}
     >
-      <span>{props.func}</span>
+      <span>{props.action}</span>
     </button>
   );
 };
 
 Button.propTypes = {
-  func: PropTypes.string.isRequired,
+  action: PropTypes.string.isRequired,
+  togglePendingAction: PropTypes.func.isRequired,
 };
+
 export default Button;
