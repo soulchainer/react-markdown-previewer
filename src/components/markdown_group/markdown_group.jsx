@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import MarkdownEditor from '../markdown_editor/markdown_editor';
 import MarkdownPreview from '../markdown_preview/markdown_preview';
 
+import ButtonAction from '../../utils/buttonActions';
 import readme from '../../../static/doc/README.md';
 import './_styles/markdown_group.scss';
 
@@ -18,14 +19,17 @@ class MarkdownGroup extends Component {
       // box to be autoscrolled, to be in sync with the one being scrolled
       autoScrolledView: null,
     };
-    this.buttonActions = {
-      clear: this.clearEditor,
-    };
+  }
+
+  componentDidMount() {
+    this.node.node.selectionStart = 0;
+    this.node.node.selectionEnd = 0;
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.pendingAction) {
-      this.buttonActions[nextProps.pendingAction].bind(this)();
+    const pendingAction = nextProps.pendingAction;
+    if (pendingAction) {
+      ButtonAction(this, pendingAction);
     }
   }
 
@@ -39,11 +43,6 @@ class MarkdownGroup extends Component {
     return debounce(el => scrollChange(el), 300);
   }
 
-  clearEditor(action) {
-    this.setState({ markdown: '' });
-    this.props.togglePendingAction(action);
-  }
-
   render() {
     return (
       <div className="MarkdownGroup">
@@ -54,6 +53,7 @@ class MarkdownGroup extends Component {
           onScrollChange={this.onScrollChange()}
           autoScrolledView={this.state.autoScrolledView}
           syncedScroll={this.state.syncedScroll}
+          ref={(node) => { this.node = node; }}
         />
         <MarkdownPreview
           markdown={this.state.markdown}

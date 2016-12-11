@@ -1,6 +1,3 @@
-
-
-
 # Inquit illi corpora
 
 ## Patulo consistere faciente ignotos ebur
@@ -64,6 +61,3 @@ remis nam Ammon. Nec in vetus primum praeponere opes tam contingere profuit
 faciat: Cyllene aliamve: quidem [fugamque](http://orbe.io/) Lapithaeae pudore.
 Pinum rogabat inspiciunt Iovi turba, et ardent sumpsisse tamen, nec terra orbem
 nosterque fissa ambitiosus [omni](http://estcorporeusque.net/sed.aspx), ponat.
-
-
-
