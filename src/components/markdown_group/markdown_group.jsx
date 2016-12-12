@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import MarkdownEditor from '../markdown_editor/markdown_editor';
 import MarkdownPreview from '../markdown_preview/markdown_preview';
 
-import ButtonAction from '../../utils/buttonActions';
+import ButtonAction, { selectText } from '../../utils/buttonActions';
 import readme from '../../../static/doc/README.md';
 import './_styles/markdown_group.scss';
 
@@ -19,6 +19,7 @@ class MarkdownGroup extends Component {
       // box to be autoscrolled, to be in sync with the one being scrolled
       autoScrolledView: null,
     };
+    this.contentSelection = null;
   }
 
   componentDidMount() {
@@ -29,7 +30,14 @@ class MarkdownGroup extends Component {
   componentWillReceiveProps(nextProps) {
     const pendingAction = nextProps.pendingAction;
     if (pendingAction) {
-      ButtonAction(this, pendingAction);
+      this.contentSelection = ButtonAction(this, pendingAction);
+    }
+  }
+
+  componentDidUpdate(previousProps, previousState) { // eslint-disable-line
+    if (this.contentSelection) {
+      selectText(this.node.node, this.contentSelection);
+      this.contentSelection = null;
     }
   }
 
