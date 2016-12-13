@@ -75,6 +75,7 @@ ButtonAction.format = {
   ul: { text: 'List item', delimiters: ['\n\n- ', '\n'] },
   hr: { text: '\n\n---\n', delimiters: ['', ''] },
   blockquote: { text: 'Blockquote', delimiters: ['\n\n> ', '\n'] },
+  code: { text: 'Code', delimiters: ['\n```\n', '\n```\n'] },
 };
 
 // TODO: use this for the multiple click behaviour
