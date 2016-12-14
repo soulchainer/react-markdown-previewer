@@ -76,6 +76,7 @@ ButtonAction.format = {
   hr: { text: '\n\n---\n', delimiters: ['', ''] },
   blockquote: { text: 'Blockquote', delimiters: ['\n\n> ', '\n'] },
   code: { text: 'Code', delimiters: ['\n```\n', '\n```\n'] },
+  image: { text: 'alt text', delimiters: ['![', '](image URL here)'] },
 };
 
 // TODO: use this for the multiple click behaviour

@@ -1,4 +1,6 @@
 .MarkdownPreview {
+  @import 'monokai';
+
   background-color: #eee;
   box-sizing: border-box;
   height: 100%;
@@ -6,5 +8,7 @@
   padding: 2rem 1rem;
   width: 50vw;
 
-  @import 'monokai';
+  & img {
+    max-width: 100%;
+  }
 }
