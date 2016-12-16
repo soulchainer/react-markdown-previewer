@@ -71,6 +71,7 @@ const ButtonAction = (self, btnName) => {
 };
 
 ButtonAction.format = {
+  strikethrough: { text: 'strikethrough text', delimiters: ['~~', '~~'] },
   bold: { text: 'strong text', delimiters: ['**', '**'] },
   emp: { text: 'emphasized text', delimiters: ['*', '*'] },
   bemp: { text: 'strong and emphasized', delimiters: ['***', '***'] },
