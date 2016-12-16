@@ -60,6 +60,8 @@ const ButtonAction = (self, btnName) => {
 
   // directly execute the proper action when ButtonAction is called
   switch (btnName) {
+    case 'image':
+      return null;
     case 'clear':
       return clearEditor();
     default:
@@ -76,14 +78,17 @@ ButtonAction.format = {
   hr: { text: '\n\n---\n', delimiters: ['', ''] },
   blockquote: { text: 'Blockquote', delimiters: ['\n\n> ', '\n'] },
   code: { text: 'Code', delimiters: ['\n```\n', '\n```\n'] },
-  image: { text: 'alt text', delimiters: ['![', '](image URL here)'] },
 };
 
 // TODO: use this for the multiple click behaviour
 ButtonAction.formatDelimiters = Object.values(ButtonAction.format).map(value => value.delimiters);
 
 export default ButtonAction;
-export const buttonList = ['clear', ...Object.keys(ButtonAction.format)];
+export const buttonList = [
+  'clear',
+  ...Object.keys(ButtonAction.format),
+  'image',
+];
 export const selectText = (node, textBoundaries) => {
   const [start, end] = textBoundaries;
   node.focus();

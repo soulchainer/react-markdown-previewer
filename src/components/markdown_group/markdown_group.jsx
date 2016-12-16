@@ -25,12 +25,18 @@ class MarkdownGroup extends Component {
   componentDidMount() {
     this.node.node.selectionStart = 0;
     this.node.node.selectionEnd = 0;
+    this.props.getEditorRef(this.node);
   }
 
   componentWillReceiveProps(nextProps) {
     const pendingAction = nextProps.pendingAction;
+    const markdown = nextProps.markdownChangedFromModal;
     if (pendingAction) {
       this.contentSelection = ButtonAction(this, pendingAction);
+    }
+    if (markdown) {
+      this.setState({ markdown });
+      this.props.clearMarkdownChangedFromModal();
     }
   }
 
@@ -76,7 +82,8 @@ class MarkdownGroup extends Component {
 }
 
 MarkdownGroup.propTypes = {
-  togglePendingAction: PropTypes.func.isRequired,
+  getEditorRef: PropTypes.func.isRequired,
+  clearMarkdownChangedFromModal: PropTypes.func.isRequired,
 };
 
 export default MarkdownGroup;
