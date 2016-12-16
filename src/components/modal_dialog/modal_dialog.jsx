@@ -24,6 +24,11 @@ class ModalDialog extends Component {
     console.log("Aquí irá la animación de cierre del componente, quitando una clase"); // eslint-disable-line
   }
 
+  transformMarkdown(action) {
+    const separator = (action === 'image') ? '!' : '';
+    return `${this.markdownHead}${separator}[${this.text}](${this.url})${this.markdownTail}`;
+  }
+
   renderModalFields() {
     const renderInputField = (id, textContent) => {
       if (id.indexOf('text') !== -1) {
@@ -84,10 +89,7 @@ class ModalDialog extends Component {
               <button
                 className="ok-button"
                 onClick={() => {
-                  // al darle a OK, se introduce pero se va el asunto al traste
-                  // dejan de funcionar el resto de botones
-                  // el error está, de alguna forma, en esta función
-                  this.props.onMarkdownChangeFromModal(`${this.markdownHead}![${this.text}](${this.url})${this.markdownTail}`);
+                  this.props.onMarkdownChangeFromModal(this.transformMarkdown(this.props.action));
                   this.props.closeModal();
                 }}
               >
@@ -113,6 +115,7 @@ ModalDialog.propTypes = {
   })).isRequired,
   onMarkdownChangeFromModal: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  action: PropTypes.string.isRequired,
 };
 
 export default ModalDialog;

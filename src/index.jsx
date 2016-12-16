@@ -23,28 +23,34 @@ class App extends Component {
   }
 
   renderModalDialog(action) {
-    switch (action) {
-      case 'image':
-        return (
-          <div>
-            <ModalDialog
-              fields={[
-                { id: 'image-url', label: 'URL' },
-                { id: 'image-text', label: 'Alt text' },
-              ]}
-              title="Image"
-              closeModal={() => this.togglePendingAction(this.state.pendingAction)}
-              editor={this.state.editor}
-              editorContainer={this.node}
-              onMarkdownChangeFromModal={markdown => this.setState({
-                markdownChangedFromModal: markdown,
-              })}
-            />
-          </div>
-        );
-      default:
-        return <div />;
-    }
+    const fields = {
+      image: [
+        { id: 'image-url', label: 'URL' },
+        { id: 'image-text', label: 'Alt text' },
+      ],
+      link: [
+        { id: 'link-url', label: 'URL' },
+        { id: 'link-text', label: 'Text' },
+      ],
+    };
+    const modalDialog = actionName =>
+      <div>
+        <ModalDialog
+          fields={fields[actionName]}
+          action={actionName}
+          title={actionName[0].toUpperCase() + actionName.slice(1)}
+          closeModal={() => this.togglePendingAction(actionName)}
+          editor={this.state.editor}
+          editorContainer={this.node}
+          onMarkdownChangeFromModal={markdown => this.setState({
+            markdownChangedFromModal: markdown,
+          })}
+        />
+      </div>
+    ;
+    const emptyBlock = <div />;
+
+    return (fields[action]) ? modalDialog(action) : emptyBlock;
   }
 
   render() {

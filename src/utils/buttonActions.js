@@ -61,6 +61,7 @@ const ButtonAction = (self, btnName) => {
   // directly execute the proper action when ButtonAction is called
   switch (btnName) {
     case 'image':
+    case 'link':
       return null;
     case 'clear':
       return clearEditor();
@@ -88,6 +89,7 @@ export const buttonList = [
   'clear',
   ...Object.keys(ButtonAction.format),
   'image',
+  'link',
 ];
 export const selectText = (node, textBoundaries) => {
   const [start, end] = textBoundaries;
