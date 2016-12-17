@@ -64,7 +64,7 @@ class ModalDialog extends Component {
 
   render() {
     return (
-      <div>
+      <div className="ModalDialog">
         <div className="modal-container" id="modal-container">
           <div className="modal">
             <div className="modal-header">

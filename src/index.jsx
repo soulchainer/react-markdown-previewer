@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactDOM from 'react-dom';
 
 import TopBar from './components/top_bar/top_bar';
 import MarkdownGroup from './components/markdown_group/markdown_group';
 import ModalDialog from './components/modal_dialog/modal_dialog';
 
-require('./_styles/reset.scss');
-require('./_styles/variables.scss');
+import './_styles/index.scss';
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class App extends Component {
       ],
     };
     const modalDialog = actionName =>
-      <div>
+      <div key={action}>
         <ModalDialog
           fields={fields[actionName]}
           action={actionName}
@@ -56,7 +56,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.renderModalDialog(this.state.pendingAction)}
+        <ReactCSSTransitionGroup
+          transitionName="ModalDialog"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={100}
+        >
+          {this.renderModalDialog(this.state.pendingAction)}
+        </ReactCSSTransitionGroup>
         <TopBar
           togglePendingAction={action => this.togglePendingAction(action)}
         />
