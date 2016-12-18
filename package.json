@@ -48,6 +48,7 @@
     "markdown-it-task-checkbox": "^1.0.1",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-responsive": "^1.2.5"
   }
 }

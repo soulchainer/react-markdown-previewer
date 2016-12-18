@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import MediaQuery from 'react-responsive';
 
 import ButtonList from '../button_list/button_list';
 import Button from '../button/button';
@@ -19,6 +20,13 @@ const TopBar = function TopBar(props) {
     <header className="TopBar">
       <ButtonList>
         {buttons}
+        <MediaQuery maxWidth={800}>
+          <button
+            className="Button"
+          >
+            <span>Prueba</span>
+          </button>
+        </MediaQuery>
       </ButtonList>
     </header>
   );

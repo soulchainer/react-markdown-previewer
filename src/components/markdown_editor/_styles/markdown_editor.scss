@@ -2,7 +2,11 @@
   border: medium none;
   box-sizing: border-box;
   height: 100%;
-  padding: 0 1rem;
+  padding: 0 3rem;
   resize: none;
   width: 50vw;
+
+  @media (max-width:800px) {
+    width: 100vw;
+  }
 }
