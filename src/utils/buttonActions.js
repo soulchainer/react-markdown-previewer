@@ -71,27 +71,60 @@ const ButtonAction = (self, btnName) => {
 };
 
 ButtonAction.format = {
-  strikethrough: { text: 'strikethrough text', delimiters: ['~~', '~~'] },
-  bold: { text: 'strong text', delimiters: ['**', '**'] },
-  emp: { text: 'emphasized text', delimiters: ['*', '*'] },
-  bemp: { text: 'strong and emphasized', delimiters: ['***', '***'] },
-  ol: { text: 'List item', delimiters: ['\n\n1. ', '\n'] },
-  ul: { text: 'List item', delimiters: ['\n\n- ', '\n'] },
-  hr: { text: '\n\n---\n', delimiters: ['', ''] },
-  blockquote: { text: 'Blockquote', delimiters: ['\n\n> ', '\n'] },
-  code: { text: 'Code', delimiters: ['\n```\n', '\n```\n'] },
+  bold: {
+    text: 'strong text',
+    delimiters: ['**', '**'],
+    tooltip: 'Strong <strong>',
+  },
+  emphasis: {
+    text: 'emphasized text',
+    delimiters: ['*', '*'],
+    tooltip: 'Emphasized <em>',
+  },
+  strikethrough: {
+    text: 'strikethrough text',
+    delimiters: ['~~', '~~'],
+    tooltip: 'Strikethrough <s>',
+  },
+  ul: {
+    text: 'List item',
+    delimiters: ['\n\n- ', '\n'],
+    tooltip: 'Unordered list <ul>',
+  },
+  ol: {
+    text: 'List item',
+    delimiters: ['\n\n1. ', '\n'],
+    tooltip: 'Ordered list <ol>',
+  },
+  hr: {
+    text: '\n\n---\n',
+    delimiters: ['', ''],
+    tooltip: 'Horizontal rule <hr>',
+  },
+  blockquote: {
+    text: 'Blockquote',
+    delimiters: ['\n\n> ', '\n'],
+    tooltip: 'Quotation <blockquote>',
+  },
+  code: {
+    text: 'Code',
+    delimiters: ['\n```\n', '\n```\n'],
+    tooltip: 'Code block <pre><code>',
+  },
 };
 
 // TODO: use this for the multiple click behaviour
 ButtonAction.formatDelimiters = Object.values(ButtonAction.format).map(value => value.delimiters);
 
+ButtonAction.buttonGroups = new Map();
+
+ButtonAction.buttonGroups.set('clear', ['clear']);
+ButtonAction.buttonGroups.set('inline', ['bold', 'emphasis', 'strikethrough']);
+ButtonAction.buttonGroups.set('block', ['ul', 'ol', 'hr', 'blockquote', 'code']);
+ButtonAction.buttonGroups.set('media', ['link', 'image']);
+
 export default ButtonAction;
-export const buttonList = [
-  'clear',
-  ...Object.keys(ButtonAction.format),
-  'image',
-  'link',
-];
+export const buttonGroups = ButtonAction.buttonGroups;
 export const selectText = (node, textBoundaries) => {
   const [start, end] = textBoundaries;
   node.focus();

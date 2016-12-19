@@ -15,7 +15,13 @@ class App extends Component {
       pendingAction: '',
       editor: null,
       markdownChangedFromModal: '',
+      actualSlide: 0,
     };
+    this.oppositeSlide = ['preview', 'editor'];
+  }
+
+  toggleActualSlide() {
+    this.setState({ actualSlide: (this.state.actualSlide + 1) % 2 });
   }
 
   togglePendingAction(action) {
@@ -65,6 +71,8 @@ class App extends Component {
         </ReactCSSTransitionGroup>
         <TopBar
           togglePendingAction={action => this.togglePendingAction(action)}
+          nextSlide={this.oppositeSlide[this.state.actualSlide]}
+          toggleActualSlide={() => this.toggleActualSlide()}
         />
         <MarkdownGroup
           pendingAction={this.state.pendingAction}
@@ -73,6 +81,8 @@ class App extends Component {
           ref={(node) => { this.node = node; }}
           markdownChangedFromModal={this.state.markdownChangedFromModal}
           clearMarkdownChangedFromModal={() => this.setState({ markdownChangedFromModal: '' })}
+          actualSlide={this.state.actualSlide}
+          toggleActualSlide={() => this.toggleActualSlide()}
         />
       </div>
     );

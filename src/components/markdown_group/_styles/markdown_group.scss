@@ -1,11 +1,10 @@
 .MarkdownGroup {
   display: flex;
-  height: calc(100vh - 50px);
-  margin-top: 50px;
+  height: calc(100vh - 3rem);
+  margin-top: 3rem;
   overflow: hidden;
 
   @media (max-width:800px) {
-    display: block;
-    width: 200vw;
+    width: 100vw;
   }
 }

@@ -20,10 +20,6 @@ class ModalDialog extends Component {
     this.text = '';
   }
 
-  componentWillUnmount() {
-    console.log("Aquí irá la animación de cierre del componente, quitando una clase"); // eslint-disable-line
-  }
-
   transformMarkdown(action) {
     const separator = (action === 'image') ? '!' : '';
     return `${this.markdownHead}${separator}[${this.text}](${this.url})${this.markdownTail}`;

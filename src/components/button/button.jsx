@@ -8,7 +8,7 @@ const Button = function Button(props) {
       className="Button"
       onClick={() => props.togglePendingAction(props.action)}
     >
-      <span>{props.action}</span>
+      <span className={`icon-${props.action}`} />
     </button>
   );
 };

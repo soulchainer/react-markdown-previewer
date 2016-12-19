@@ -1,5 +1,7 @@
 import { debounce } from 'lodash';
 import React, { Component, PropTypes } from 'react';
+import MediaQuery from 'react-responsive';
+import SwipeableViews from 'react-swipeable-views';
 
 import MarkdownEditor from '../markdown_editor/markdown_editor';
 import MarkdownPreview from '../markdown_preview/markdown_preview';
@@ -58,32 +60,59 @@ class MarkdownGroup extends Component {
   }
 
   render() {
+    const editor = (
+      <MarkdownEditor
+        markdown={this.state.markdown}
+        onContentChange={markdown => this.setState({ markdown })}
+        onMouseEnter={() => this.setState({ autoScrolledView: 'preview' })}
+        onScrollChange={this.onScrollChange()}
+        autoScrolledView={this.state.autoScrolledView}
+        syncedScroll={this.state.syncedScroll}
+        ref={(node) => { this.node = node; }}
+      />
+    );
+    const preview = (
+      <MarkdownPreview
+        markdown={this.state.markdown}
+        onMouseEnter={() => this.setState({ autoScrolledView: 'editor' })}
+        onScrollChange={this.onScrollChange()}
+        autoScrolledView={this.state.autoScrolledView}
+        syncedScroll={this.state.syncedScroll}
+      />
+    );
+
     return (
-      <div className="MarkdownGroup">
-        <MarkdownEditor
-          markdown={this.state.markdown}
-          onContentChange={markdown => this.setState({ markdown })}
-          onMouseEnter={() => this.setState({ autoScrolledView: 'preview' })}
-          onScrollChange={this.onScrollChange()}
-          autoScrolledView={this.state.autoScrolledView}
-          syncedScroll={this.state.syncedScroll}
-          ref={(node) => { this.node = node; }}
-        />
-        <MarkdownPreview
-          markdown={this.state.markdown}
-          onMouseEnter={() => this.setState({ autoScrolledView: 'editor' })}
-          onScrollChange={this.onScrollChange()}
-          autoScrolledView={this.state.autoScrolledView}
-          syncedScroll={this.state.syncedScroll}
-        />
-      </div>
+      <MediaQuery maxWidth={800}>
+        {(matches) => {
+          if (matches) {
+            return (
+              <SwipeableViews
+                className="MarkdownGroup"
+                index={this.props.actualSlide}
+                onChangeIndex={() => this.props.toggleActualSlide()}
+              >
+                {editor}
+                {preview}
+              </SwipeableViews>
+            );
+          }
+          return (
+            <div className="MarkdownGroup">
+              {editor}
+              {preview}
+            </div>
+          );
+        }}
+      </MediaQuery>
     );
   }
 }
 
 MarkdownGroup.propTypes = {
+  actualSlide: PropTypes.number.isRequired,
   getEditorRef: PropTypes.func.isRequired,
   clearMarkdownChangedFromModal: PropTypes.func.isRequired,
+  toggleActualSlide: PropTypes.func.isRequired,
 };
 
 export default MarkdownGroup;
