@@ -23,8 +23,22 @@ const TopBar = function TopBar(props) {
     </ButtonList>,
   );
 
+  const horizontalScroll = (event) => {
+    event.preventDefault();
+    const movement = event.deltaY * 10;
+    const bar = event.currentTarget;
+    const minScroll = bar.scrollLeft;
+    const maxScroll = bar.scrollLeftMax;
+    if ((movement > 0 && maxScroll !== minScroll) || (movement < 0 && maxScroll)) {
+      bar.scrollLeft += movement;
+    }
+  };
+
   return (
-    <header className="TopBar">
+    <header
+      className="TopBar"
+      onWheel={horizontalScroll}
+    >
       {buttons}
       <MediaQuery maxWidth={800}>
         <ButtonList>
@@ -34,6 +48,7 @@ const TopBar = function TopBar(props) {
           />
         </ButtonList>
       </MediaQuery>
+      <div className="fade-limits" />
     </header>
   );
 };

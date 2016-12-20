@@ -1,10 +1,34 @@
 .TopBar {
   @import 'brandico.css';
 
-  background-color: #36ace8;
+  background-color: #1872B3;
   display: flex;
-  height: 3rem;
+  height: 3.4rem;
+  overflow-y: hidden;
+  overflow-x: auto;
+  /*
+    Compensate the height of an eventual horizontal scrollbar, overlapped by
+    the MarkdownGroup component
+  */
+  padding-bottom: 13px;
   position: fixed;
   top: 0;
   width: 100vw;
+  /*
+    This allows to overlap the bar with the MarkdownGroup component, even with
+    the position: fixed, for hiding an eventual horizontal scrollbar
+  */
+  z-index: -1;
+  /*
+    Fade right edge of the bar, to provide visual hint that there are more menu
+    elements available upon horizontal scrolling
+  */
+  &>.fade-limits {
+    background-image: linear-gradient(to right, transparent, #1872B3);
+    height: 3.4rem;
+    opacity: .7;
+    position: fixed;
+    right: 0;
+    width: 2.8rem;
+  }
 }
