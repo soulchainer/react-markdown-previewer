@@ -1,7 +1,9 @@
 .TopBar {
   @import 'brandico.css';
 
-  background-color: #1872B3;
+  $blue: #1872B3;
+
+  background-color: $blue;
   display: flex;
   height: 3.4rem;
   overflow-y: hidden;
@@ -19,7 +21,7 @@
     elements available upon horizontal scrolling
   */
   &>.fade-limits {
-    background-image: linear-gradient(to right, transparent, #1872B3);
+    background-image: linear-gradient(to right, transparent, $blue);
     height: 3.4rem;
     opacity: .7;
     position: fixed;

@@ -1,6 +1,8 @@
 .ButtonList {
+  $light-grey: #eee;
+
   align-items: center;
-  border-right: 1px dashed transparentize(#eee, .8);
+  border-right: 1px dashed transparentize($light-grey, .8);
   display: flex;
   list-style: none;
   margin: 0 .3125rem;

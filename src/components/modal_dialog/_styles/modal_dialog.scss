@@ -1,7 +1,7 @@
 .ModalDialog {
   $green: #43a647;
-  $red: #EA1E21;
-  $light-grey: #EBEBEB;
+  $red: #ea1e21;
+  $light-grey: #ebebeb;
   $medium-grey: #e0e0e0;
   $black: #282828;
   $border-grey: mix($medium-grey, $black, 95%);
@@ -21,7 +21,7 @@
     justify-content: center;
     left: 0;
     position: fixed;
-    top:0;
+    top: 0;
     visibility: visible;
     width: 100vw;
     z-index: 1000;
@@ -31,7 +31,7 @@
   .modal {
     background-color: $white;
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(40, 40, 40, .7);
+    box-shadow: 0 0 5px transparentize($black, .3);
     left: auto;
     max-width: 90vw;
     min-width: 255px;
@@ -124,7 +124,7 @@
 
   /* Animate the dialog when entering/leaving the DOM */
   &-enter {
-    opacity: 0.01;
+    opacity: .01;
 
     &-active {
       opacity: 1;
@@ -136,7 +136,7 @@
     opacity: 1;
 
     &-active {
-      opacity: 0.01;
+      opacity: .01;
       transition: opacity 100ms ease-in;
     }
   }

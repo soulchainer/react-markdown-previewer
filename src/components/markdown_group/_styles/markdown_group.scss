@@ -1,9 +1,10 @@
 .MarkdownGroup {
+  $light-grey: #eee;
   /*
     Without a background-color setted, there is an strange behaviour when
     changing between slides
   */
-  background-color: #eee;
+  background-color: $light-grey;
   display: flex;
   /*
     Magical numbers here (3rem and 13px) are for place the component just after
