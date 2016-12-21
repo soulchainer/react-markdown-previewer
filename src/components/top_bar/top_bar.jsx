@@ -39,7 +39,6 @@ const TopBar = function TopBar(props) {
       className="TopBar"
       onWheel={horizontalScroll}
     >
-      {buttons}
       <MediaQuery maxWidth={800}>
         <ButtonList>
           <button
@@ -48,6 +47,7 @@ const TopBar = function TopBar(props) {
           />
         </ButtonList>
       </MediaQuery>
+      {buttons}
       <div className="fade-limits" />
     </header>
   );
