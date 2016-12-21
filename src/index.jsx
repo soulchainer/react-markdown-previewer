@@ -13,7 +13,6 @@ class App extends Component {
     super(props);
     this.state = {
       pendingAction: '',
-      editor: null,
       markdownChangedFromModal: '',
       actualSlide: 0,
     };
@@ -46,7 +45,7 @@ class App extends Component {
           action={actionName}
           title={actionName[0].toUpperCase() + actionName.slice(1)}
           closeModal={() => this.togglePendingAction(actionName)}
-          editor={this.state.editor}
+          editor={this.node.editor}
           editorContainer={this.node}
           onMarkdownChangeFromModal={markdown => this.setState({
             markdownChangedFromModal: markdown,
@@ -77,7 +76,6 @@ class App extends Component {
         <MarkdownGroup
           pendingAction={this.state.pendingAction}
           togglePendingAction={action => this.togglePendingAction(action)}
-          getEditorRef={ref => this.setState({ editor: ref })}
           ref={(node) => { this.node = node; }}
           markdownChangedFromModal={this.state.markdownChangedFromModal}
           clearMarkdownChangedFromModal={() => this.setState({ markdownChangedFromModal: '' })}

@@ -25,9 +25,8 @@ class MarkdownGroup extends Component {
   }
 
   componentDidMount() {
-    this.node.node.selectionStart = 0;
-    this.node.node.selectionEnd = 0;
-    this.props.getEditorRef(this.node);
+    this.editor.node.selectionStart = 0;
+    this.editor.node.selectionEnd = 0;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,7 +43,7 @@ class MarkdownGroup extends Component {
 
   componentDidUpdate(previousProps, previousState) { // eslint-disable-line
     if (this.contentSelection) {
-      selectText(this.node.node, this.contentSelection);
+      selectText(this.editor.node, this.contentSelection);
       this.contentSelection = null;
     }
   }
@@ -68,7 +67,7 @@ class MarkdownGroup extends Component {
         onScrollChange={this.onScrollChange()}
         autoScrolledView={this.state.autoScrolledView}
         syncedScroll={this.state.syncedScroll}
-        ref={(node) => { this.node = node; }}
+        ref={(node) => { this.editor = node; }}
       />
     );
     const preview = (
@@ -110,7 +109,6 @@ class MarkdownGroup extends Component {
 
 MarkdownGroup.propTypes = {
   actualSlide: PropTypes.number.isRequired,
-  getEditorRef: PropTypes.func.isRequired,
   clearMarkdownChangedFromModal: PropTypes.func.isRequired,
   toggleActualSlide: PropTypes.func.isRequired,
 };

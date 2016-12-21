@@ -46,7 +46,7 @@ const ButtonAction = (self, btnName) => {
 
   // Choose between insert the default text formated or format the selected text
   const textFormat = () => {
-    const node = self.node.node;
+    const node = self.editor.node;
     const [start, end] = [node.selectionStart, node.selectionEnd];
     let contentSelection;
     if (start === end) {
