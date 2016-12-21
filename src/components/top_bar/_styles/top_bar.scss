@@ -5,12 +5,7 @@
   display: flex;
   height: 3.4rem;
   overflow-y: hidden;
-  overflow-x: auto;
-  /*
-    Compensate the height of an eventual horizontal scrollbar, overlapped by
-    the MarkdownGroup component
-  */
-  padding-bottom: 13px;
+  overflow-x: scroll;
   position: fixed;
   top: 0;
   width: 100vw;
