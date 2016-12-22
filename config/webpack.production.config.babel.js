@@ -27,7 +27,6 @@ export default new Config().extend({
 
     delete conf.devtool;
     delete conf.output.pathinfo;
-    delete conf.plugins;
 
     return conf;
   },
@@ -75,6 +74,9 @@ export default new Config().extend({
   plugins: [
     extractSCSS,
     HtmlWebpackPluginConf,
+    new webpack.LoaderOptionsPlugin({
+      debug: false,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
