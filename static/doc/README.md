@@ -42,9 +42,11 @@ agros lacrimaeque locumque certa Aeneae macies talis.
 
 1. Illa domum securi
 2. Avem utinam gradu
+   1. Gyrum adulterio scopulis nostra
 3. Gregibus ademit iactantem videt mallet centumque tulit
 4. Et proles testa
 5. Hanc iamque
+   1. Cui suspicor vocas
 6. Nec per rex
 
 Partibus multifori Eurynomes at voluit deos *super Thebas* omnia ibi gurgite
@@ -63,7 +65,9 @@ media, fuit lunae famulumque finis ait speciem turbam Peleu Baucisque ferire aut
 canam aliter dixit. Easdem paenitet sensisset piscibus, ab et saecula dixit.
 
 - Usus est non loqui et exaudi stramina
+  * Peregit totas riguo
 - Divulsaque altera victor ingreditur obscura in cerata
+  * Intremuit ille hac
 - Illa fuit hunc
 
 Per fusus guttis parent, **eversae dea**; detegeret vocis, ora umbras bipennifer
