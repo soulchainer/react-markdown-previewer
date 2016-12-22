@@ -27,6 +27,7 @@ export default new Config().extend({
 
     delete conf.devtool;
     delete conf.output.pathinfo;
+    delete conf.plugins;
 
     return conf;
   },
@@ -48,7 +49,7 @@ export default new Config().extend({
           loader: [
             {
               loader: 'css-loader',
-              options: {
+              query: {
                 importLoaders: 2,
                 minimize: true,
                 sourceMap: true,
@@ -56,6 +57,9 @@ export default new Config().extend({
             },
             {
               loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+              },
             },
             {
               loader: 'sass-loader',
@@ -71,6 +75,11 @@ export default new Config().extend({
   plugins: [
     extractSCSS,
     HtmlWebpackPluginConf,
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
     new webpack.optimize.UglifyJsPlugin(),
   ],
 });
