@@ -3,6 +3,7 @@ import Config from 'webpack-config'; // eslint-disable-line import/no-extraneous
 import ExtractTextPlugin from 'extract-text-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
 import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
+import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin'; // eslint-disable-line import/no-extraneous-dependencies
 
 const HtmlWebpackPluginConf = new HtmlWebpackPlugin({
   filename: '../index.html',
@@ -74,6 +75,9 @@ export default new Config().extend({
   plugins: [
     extractSCSS,
     HtmlWebpackPluginConf,
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer',
+    }),
     new webpack.LoaderOptionsPlugin({
       debug: false,
     }),

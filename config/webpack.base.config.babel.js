@@ -12,23 +12,10 @@ export default new Config().merge({
   context: resolve(__dirname, '..'),
   entry: {
     app: './src/index.jsx',
-    vendor: [
-      './static/lib/highlight/index.js',
-      './node_modules/lodash/debounce.js',
-      'markdown-it',
-      'markdown-it-emoji',
-      'markdown-it-footnote',
-      'markdown-it-task-checkbox',
-      'react',
-      'react-addons-css-transition-group',
-      'react-dom',
-      'react-motion',
-      'react-responsive',
-      'react-swipeable-views',
-    ],
   },
   output: {
     filename: '[name].js',
+    chunkFilename: '[name]-[chunkhash].js',
   },
   module: {
     rules: [
@@ -63,7 +50,8 @@ export default new Config().merge({
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest'],
+      name: 'vendor',
+      minChunks: ({ resource }) => /node_modules/.test(resource),
     }),
   ],
 });
