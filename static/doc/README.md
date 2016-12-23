@@ -54,6 +54,14 @@ pondus; pudoris. Mihi ferro moriente invidiosa vulnera cervix. Quid memor
 concordi, [est pectora ferebat](http://quodfacies.org/erat.html) esset, tuos
 miles postquam.
 
+
+- [ ] Infamis primumque instant
+- [x] Huius cum nullo columbas
+- [x] Fulminis flammas novissima in amanti placeas popularia
+- [ ] Debuerant ratus miserum finxit pars traxit ad
+- [ ] Et fors verum aera utilis numen sermonibus
+- [x] Videbar intrat
+
 Creatus Calydon serpens neque, cursu, per *terras*, transit medioque Bactrius;
 quam? **Et tumulo igneus**. Hoc actis ipse non sororis Helenamque talisque
 sperat Graias, deforme celeri tenuissima arvis.

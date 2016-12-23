@@ -63,26 +63,6 @@
   img {
     max-width: 100%;
   }
-
-  ol {
-    counter-reset: list-counter;
-    list-style-type: none;
-
-    &>li:before {
-      color: $blue;
-      content: counters(list-counter,".") " ";
-      counter-increment: list-counter;
-      display: inline-block;
-      margin-right: .5em;
-      vertical-align: sub;
-
-      font: {
-        size: 1.2em;
-        style: italic;
-        weight: 700;
-      }
-    }
-  }
   
   ul {
     list-style-type: square;
@@ -93,6 +73,10 @@
     &-backref {
       color: $green;
     }
+  }
+
+  .task-list {
+    list-style-type: none;
   }
 
   @media (max-width:800px) {
